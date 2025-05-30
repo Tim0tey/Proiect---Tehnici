@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+
+    position: relative;
+    background-image: url('chesspicture.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;   
+    background-position: center;
+}
+
