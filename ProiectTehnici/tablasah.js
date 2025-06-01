@@ -83,9 +83,28 @@ function moveSelectedPiecteTo(x, y){
         gameMessage = "Remiza!"
     }
 }
-function specialMove(){
-    if(){
-
+function specialMove(x, y){
+    if(selectedPiece instanceof Pawn){
+        if(enPassantTarget && x === enPassantTarget.x && y === enPassantTarget.y){
+            let dir;
+            if(selectedPiece.color === "white"){
+                dir = 1;
+            }else{
+                dir -1;
+            }
+            board[y + dir][x] = null
+        }
+        if(Math.abs(y - selectedPiece.y) === 2){
+            let middleY;
+            if(y > selectedPiece.y){
+                middleY = selectedPiece.y + 1;
+            }else{
+                middleY = selectedPiece.y - 1;
+            }
+            enPassantTarget = {x: x, y: middleY}
+        }else{
+            enPassantTarget = null;
+        }
     }
 }
 
