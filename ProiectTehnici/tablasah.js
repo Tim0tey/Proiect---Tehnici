@@ -118,3 +118,21 @@ function checkDrawByInsufficientMaterial(){
     }
     return false;
 }
+class Piece{
+    constructor(x, y, color){
+        this.x = x;
+        this.y = y;
+        this.color = color;
+    }
+    draw(){
+        textSize(40);
+        textAllign(CENTER, CENTER)
+       if(this.color === "white"){
+        fill(255);
+       }else {
+        fill(0)
+       }
+    
+    text(this.symbol, this.x * cellSize + cellSize / 2, this.y * cellSize + cellSize / 2)
+    }
+}
