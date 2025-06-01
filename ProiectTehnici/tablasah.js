@@ -71,7 +71,7 @@ function moveSelectedPiecteTo(x, y){
     selectedPiece = null;
     switchTurn();
 
-    if(!isKingAlive(board, turn)){
+    if(!isKingAlive(turn)){
         noLoop();
         if(turn === "white"){
             gameMessage = "Black wins!";
@@ -79,9 +79,8 @@ function moveSelectedPiecteTo(x, y){
             gameMessage = "You win!"
         }
     }else if(checkDrawByInsufficientMaterial(board)){
-        const pieces = [];
-        for(let row of board)
-
+        noLoop();
+        gameMessage = "Remiza!"
     }
 }
 function specialMove(){
@@ -118,6 +117,28 @@ function checkDrawByInsufficientMaterial(){
         }
     }
     return false;
+}
+function drawBoard(){
+    for(let y =0; y < boardSize; y++){
+        for(let x = 0; x < boardSize; x++){
+            if((x + y) % 2 == 0){
+                fill(240)
+            }else {
+                fill(150)
+            }
+            rect(x * cellSize, y * cellSize, cellSize, cellSize)
+        }
+    }
+}
+function validMoves(piece){
+    for(let y = 0; y< boardSize; y++){
+        for(let x = 0; x < boardSize; x++){
+            if(piece.canMove(x, y, board)){
+                fill(0, 255, 0, 100);
+                rect(x * cellSize, y * cellSize, cellSize, cellSize)
+            }
+        }
+    }
 }
 function drawPieces(){
     for(let row of board){
