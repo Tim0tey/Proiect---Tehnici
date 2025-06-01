@@ -20,7 +20,7 @@ function draw() {
     if(gameMessage !== ""){
         fill(0);
         textSize(24);
-        textAllign(screenLeft, TOP);
+        textAlign(LEFT, TOP);
         text(gameMessage, 10, 10)
     }
 }
@@ -47,15 +47,15 @@ function mousePressed() {
 function clickOnBoard(x, y) {
     const piece = board[y][x];
     if (selectedPiece) {
-        moveSelectedPiecteto(x, y);
+        moveSelectedPiecteTo(x, y);
     }else if(piece && piece.color === turn){
         selectedPiece(piece);
     }
 }
-function selectedPiece(piece){
+function selectPiece(piece){
     selectedPiece = piece;
 }
-function moveSelectedPiecteto(x, y){
+function moveSelectedPiecteTo(x, y){
     if(!selectedPiece.canMove(x, y, board)){
         selectedPiece = null;
         return;
@@ -79,7 +79,8 @@ function moveSelectedPiecteto(x, y){
             gameMessage = "You win!"
         }
     }else if(checkDrawByInsufficientMaterial(board)){
-        noLoop();
+        const pieces = [];
+        for(let row of board)
 
     }
 }
@@ -89,7 +90,7 @@ function specialMove(){
     }
 }
 
-function isKingAlive(){
+function isKingAlive(board, color){
     for(let row of board){
         for(let piece of row){
             if(piece && piece instanceof King && piece.color === color)
@@ -118,6 +119,13 @@ function checkDrawByInsufficientMaterial(){
     }
     return false;
 }
+function drawPieces(){
+    for(let row of board){
+        for(let piece of row){
+            if(piece) piece.draw()
+        }
+    }
+}
 class Piece{
     constructor(x, y, color){
         this.x = x;
@@ -126,7 +134,7 @@ class Piece{
     }
     draw(){
         textSize(40);
-        textAllign(CENTER, CENTER)
+        textAlign(CENTER, CENTER)
        if(this.color === "white"){
         fill(255);
        }else {
@@ -136,3 +144,4 @@ class Piece{
     text(this.symbol, this.x * cellSize + cellSize / 2, this.y * cellSize + cellSize / 2)
     }
 }
+
