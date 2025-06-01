@@ -160,8 +160,24 @@ function specialMove(x, y){
         }else{
             enPassantTarget = null;
         }
+
+
+        //Promovarea unei noi regine
+        if(selectedPiece.color === "white" &&  y === 0){
+            board[selectedPiece.y][selectedPiece.x] = null;
+            board[y][x] = new Queen(x, y, "white");
+            selectedPiece = null
+        }
+        if(selectedPiece && selectedPiece.color === "black" && y === 7){
+            board[selectedPiece.y][selectedPiece.x] = null;
+            board[y][x] = new Queen(x, y, "black");
+            selectedPiece = null;
+        }
+    }else{
+        enPassantTarget = null;
     }
 }
+
 
 function isKingAlive(board, color){
     for(let row of board){
